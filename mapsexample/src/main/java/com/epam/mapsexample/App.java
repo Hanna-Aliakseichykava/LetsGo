@@ -12,6 +12,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 
+import com.epam.mapsexample.db.model.AppUser;
+import com.epam.mapsexample.db.service.UserService;
 import com.epam.mapsexample.model.Location;
 import com.epam.mapsexample.model.PlaceType;
 import com.epam.mapsexample.service.CurrentLocationService;
@@ -29,6 +31,9 @@ public class App {
 
 	@Autowired
 	PlacesService placesService;
+	
+	@Autowired
+	UserService userService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(App.class, args);
@@ -46,7 +51,7 @@ public class App {
 				LOG.debug(beanName);
 			}
 
-			Location location = locationService.getCurrentLocation(true);
+			/*Location location = locationService.getCurrentLocation(true);
 			LOG.info(location.toString());
 
 			List<Place> places = placesService.getPlaces(location, PlaceType.CAFE);
@@ -57,7 +62,10 @@ public class App {
 
 			// Check cache
 			List<Place> places3 = placesService.getPlaces(location, PlaceType.CAFE);
-			LOG.info(places3.toString());
+			LOG.info(places3.toString());*/
+			
+			List<AppUser> users = userService.getAllUsers();
+			LOG.info("Users: " + users);
 
 		};
 	}
